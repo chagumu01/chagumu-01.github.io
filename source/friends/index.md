@@ -6,43 +6,43 @@ top_img: false
 comments: false
 ---
 
-<link rel="stylesheet" href="/css/friends.css">
+<link rel="stylesheet" href="/css/friends.css?v=20261014-2">
 
 <div class="flk" id="flk-page">
   <header class="flk-intro">
     <p class="flk-intro__tag">chagumu.site / links</p>
-    <h1 class="flk-intro__title"><i class="fas fa-handshake" aria-hidden="true"></i> 路标亭</h1>
-    <p class="flk-intro__lead">这里是我收藏的博客小站。都是我会再次点开、也愿意推荐给朋友的地方，数量不多，但每一条都很珍惜。</p>
+    <h1 class="flk-intro__title"><i class="fas fa-handshake" aria-hidden="true"></i> 友情链接</h1>
+    <p class="flk-intro__lead">个人博客与技术站点。点击卡片访问网站。</p>
   </header>
 
   <details class="flk-charter" open>
-    <summary>交换友链前，麻烦先看这里～</summary>
+    <summary>交换友链</summary>
     <div class="flk-charter__body">
-      <p>如果你也想和我交换友链，请先把本站加到你的友链页，再来申请哦。希望你的博客有自己的文字或作品，这样我们才能更好地互相交流。</p>
-      <p>我会不定期看看链接是否还能正常打开。如果换了域名或者暂时关站了，告诉我一声就好，我来帮你更新。</p>
+      <ol><li>将本站信息添加到你的友链页。</li><li>填写下方申请表，点击“生成申请草稿”。</li><li>登录 GitHub，核对信息后提交 Issue。</li></ol>
+      <p>申请站点需能正常访问，并包含原创文章或作品。域名、头像或站点状态变更时，请在申请 Issue 中更新信息。</p>
     </div>
   </details>
 
   <div class="flk-roster-bar">
     <div>
-      <h2 class="flk-roster-bar__title"><i class="fas fa-link" aria-hidden="true"></i> 名册</h2>
+      <h2 class="flk-roster-bar__title"><i class="fas fa-link" aria-hidden="true"></i> 友链列表</h2>
       <p class="flk-roster-bar__sub" id="flk-count">统计中</p>
     </div>
-    <button type="button" class="flk-btn flk-btn--line" id="flk-random"><i class="fas fa-dice" aria-hidden="true"></i> 随机逛逛</button>
+    <button type="button" class="flk-btn flk-btn--line" id="flk-random"><i class="fas fa-dice" aria-hidden="true"></i> 随机访问</button>
   </div>
 </div>
 
 <div class="flk-tail">
   <section class="flk-write" id="flk-write">
     <div class="flk-write__head">
-      <h2><i class="fas fa-feather-alt" aria-hidden="true"></i> 也想和我交换友链吗？</h2>
-      <p>填好下面的信息就好啦。我会帮你打开 GitHub 页面，草稿都准备好了，你核对一下提交就行。</p>
+      <h2><i class="fas fa-feather-alt" aria-hidden="true"></i> 提交申请</h2>
+      <p>填写站名、地址、头像和简介。生成草稿后，在 GitHub 提交申请。</p>
     </div>
     <form class="flk-form" id="flk-form" novalidate>
       <div class="flk-form__row">
         <label class="flk-field">
-          <span>你的站名</span>
-          <input type="text" name="name" placeholder="博客叫什么名字？" required>
+          <span>站点名称</span>
+          <input type="text" name="name" placeholder="博客或网站名称" required>
         </label>
         <label class="flk-field">
           <span>站点地址</span>
@@ -55,28 +55,28 @@ comments: false
           <input type="url" name="avatar" placeholder="https://…/avatar.png" required>
         </label>
         <label class="flk-field">
-          <span>怎么联系你</span>
-          <input type="text" name="contact" placeholder="邮箱、GitHub 或社交账号都可以">
+          <span>联系方式（选填）</span>
+          <input type="text" name="contact" placeholder="邮箱、GitHub 或社交账号">
         </label>
       </div>
       <label class="flk-field">
         <span>一句话介绍</span>
-        <textarea name="descr" rows="2" placeholder="简单说说你的博客在写什么～" required></textarea>
+        <textarea name="descr" rows="2" placeholder="站点主题或主要内容" required></textarea>
       </label>
       <label class="flk-field">
-        <span>预览图（可不填）</span>
-        <input type="url" name="siteshot" placeholder="没有也没关系，我会尽量帮你补一张">
+        <span>预览图（选填）</span>
+        <input type="url" name="siteshot" placeholder="https://…/preview.png">
       </label>
       <div class="flk-form__foot">
         <button type="submit" class="flk-btn flk-btn--solid"><i class="fas fa-paper-plane" aria-hidden="true"></i> 生成申请草稿</button>
-        <span class="flk-form__tip">信息只在你的浏览器里处理，不会保存到服务器</span>
+        <span class="flk-form__tip">点击按钮后打开 GitHub，需手动提交 Issue。</span>
       </div>
     </form>
   </section>
 
   <aside class="flk-clip">
-    <h2><i class="fas fa-copy" aria-hidden="true"></i> 摘抄本</h2>
-    <p>添加本站友链时，复制下面这段就好。</p>
+    <h2><i class="fas fa-copy" aria-hidden="true"></i> 本站信息</h2>
+    <p>将以下信息添加到你的友链页。</p>
     <pre class="flk-clip__code" id="flk-clip-code">{
   "title": "chagumu's blog",
   "url": "https://chagumu.site/",
@@ -87,4 +87,4 @@ comments: false
   </aside>
 </div>
 
-<script src="/js/friends.js" defer></script>
+<script src="/js/friends.js?v=20261014-1" defer></script>

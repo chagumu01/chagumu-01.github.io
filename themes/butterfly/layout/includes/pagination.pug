@@ -9,28 +9,20 @@
 if is_post()
   - let prev = theme.post_pagination === 1 ? page.prev : page.next
   - let next = theme.post_pagination === 1 ? page.next : page.prev
-  nav#pagination.pagination-post
+  nav#pagination.minimal-post-navigation(class={ 'minimal-post-navigation--single': !prev || !next } aria-label='文章上下篇导航')
     if(prev)
-      - var hasPageNext = next ? 'pull-left' : 'pull-full'
-      .prev-post(class=hasPageNext)
-        - var pagination_cover = prev.cover === false ? prev.randomcover : prev.cover
-        a(href=url_for(prev.path))
-          img.prev-cover(src=url_for(pagination_cover) onerror=`onerror=null;src='${url_for(theme.error_img.post_page)}'` alt='cover of previous post')
-          .pagination-info
-            .label=_p('pagination.prev')
-            .prev_info=prev.title
+      a.minimal-post-nav__link(href=url_for(prev.path) rel='prev')
+        span.minimal-post-nav__label ← #{_p('pagination.prev')}
+        span.minimal-post-nav__title=prev.title
           
     if(next)
-      - var hasPagePrev = prev ? 'pull-right' : 'pull-full'
-      - var pagination_cover = next.cover == false ? next.randomcover : next.cover
-      .next-post(class=hasPagePrev)
-        a(href=url_for(next.path))
-          img.next-cover(src=url_for(pagination_cover) onerror=`onerror=null;src='${url_for(theme.error_img.post_page)}'` alt='cover of next post')
-          .pagination-info
-            .label=_p('pagination.next')
-            .next_info=next.title
+      a.minimal-post-nav__link.minimal-post-nav__link--next(href=url_for(next.path) rel='next')
+        span.minimal-post-nav__label #{_p('pagination.next')} →
+        span.minimal-post-nav__title=next.title
 else
   nav#pagination
+    if is_home()
+      p.minimal-pagination-caption 第 #{page.current} / #{page.total} 页 · 每页 #{config.index_generator.per_page} 篇
     .pagination
       if is_home()
         - options.format = 'page/%d/#content-inner'

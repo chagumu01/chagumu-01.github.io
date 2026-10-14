@@ -1,3 +1,15 @@
-
-.category-lists!= list_categories()
-
+p.minimal-taxonomy-lead 按主题整理的学习笔记。选择分类查看相关文章。
+.minimal-category-grid
+  each category in site.categories.data.filter(c => !c.parent).sort((a, b) => a.name.localeCompare(b.name))
+    section.minimal-category-card
+      a.minimal-category-title(href=url_for(category.path))
+        span= category.name
+        span.minimal-taxonomy-count #{category.length} 篇
+      .minimal-category-children
+        each child in site.categories.data.filter(c => c.parent === category._id).sort((a, b) => a.name.localeCompare(b.name))
+          a(href=url_for(child.path))
+            span= child.name
+            span.minimal-taxonomy-count #{child.length} 篇 →
+      .minimal-category-preview
+        each article in category.posts.sort('date', -1).limit(3).data
+          a(href=url_for(article.path))= article.title

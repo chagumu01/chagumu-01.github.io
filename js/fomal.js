@@ -3917,3 +3917,405 @@ function toggleWinbox() {
 }
 
 /* 美化模块 end */
+
+//----------------------------------------------------------------
+
+/* 首页终端小部件 start */
+document.addEventListener('pjax:complete', initTerminalWidget);
+document.addEventListener('DOMContentLoaded', initTerminalWidget);
+
+function initTerminalWidget() {
+  var input = document.getElementById('terminal-input');
+  var output = document.getElementById('terminal-output');
+  if (!input || !output) return;
+  if (input.dataset.initialized) return;
+  input.dataset.initialized = 'true';
+
+  var commandHistory = [];
+  var historyIndex = -1;
+
+  // 开机欢迎语
+  typeTerminalLine(output, 'response', '欢迎来到 chagumu 的博客终端 v1.0 ');
+  setTimeout(function () {
+    typeTerminalLine(output, 'info', '输入 help 查看可用命令');
+  }, 600);
+
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+      var cmd = input.value.trim();
+      if (!cmd) return;
+
+      commandHistory.push(cmd);
+      historyIndex = commandHistory.length;
+
+      // 显示输入的命令
+      var cmdLine = document.createElement('div');
+      cmdLine.className = 'terminal-line terminal-line--cmd';
+      cmdLine.textContent = cmd;
+      output.appendChild(cmdLine);
+
+      input.value = '';
+
+      // 处理命令
+      processTerminalCommand(cmd, output);
+
+      // 滚动到底部
+      var body = input.closest('.terminal-body');
+      if (body) body.scrollTop = body.scrollHeight;
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (historyIndex > 0) {
+        historyIndex--;
+        input.value = commandHistory[historyIndex];
+      }
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (historyIndex < commandHistory.length - 1) {
+        historyIndex++;
+        input.value = commandHistory[historyIndex];
+      } else {
+        historyIndex = commandHistory.length;
+        input.value = '';
+      }
+    }
+  });
+
+  // 点击终端区域聚焦输入框
+  input.closest('.terminal-body').addEventListener('click', function () {
+    input.focus();
+  });
+}
+
+function processTerminalCommand(cmd, output) {
+  var lower = cmd.toLowerCase();
+  var parts = lower.split(/\s+/);
+  var command = parts[0];
+
+  var responses = {
+    'help': [
+      { type: 'response', text: '可用命令列表：' },
+      { type: 'info', text: '  help      - 显示帮助信息' },
+      { type: 'info', text: '  about     - 关于博主' },
+      { type: 'info', text: '  skills    - 技能栈' },
+      { type: 'info', text: '  blog      - 博客文章' },
+      { type: 'info', text: '  contact   - 联系方式' },
+      { type: 'info', text: '  neofetch  - 系统信息' },
+      { type: 'info', text: '  date      - 当前时间' },
+      { type: 'info', text: '  joke      - 随机笑话' },
+      { type: 'info', text: '  clear     - 清空屏幕' },
+      { type: 'info', text: '  sudo      - 你懂的 😏' },
+    ],
+    'about': [
+      { type: 'response', text: '👨‍💻 chagumu - 全栈开发者 / AI 探索者' },
+      { type: 'response', text: '热爱技术，喜欢折腾，专注于 Java、AI/LLM、算法领域。' },
+      { type: 'response', text: '相信 Build fast, learn faster。' },
+    ],
+    'skills': [
+      { type: 'response', text: '🛠 技能栈：' },
+      { type: 'success', text: '  后端：Java · Spring Boot · MySQL · MyBatis' },
+      { type: 'success', text: '  前端：Vue 3 · HTML/CSS · JavaScript' },
+      { type: 'success', text: '  AI：LLM Agent · RAG · Prompt Engineering' },
+      { type: 'success', text: '  工具：Git · Linux · Docker · Hexo' },
+    ],
+    'blog': [
+      { type: 'link', text: '  📝 访问博客文章 → ', href: '/archives/' },
+      { type: 'response', text: '  涵盖 Java、AI/LLM、算法、生活随笔等方向。' },
+    ],
+    'contact': [
+      { type: 'response', text: '📬 联系方式：' },
+      { type: 'link', text: '  GitHub → ', href: 'https://github.com/chagumu-01' },
+      { type: 'link', text: '  B站 → ', href: 'https://space.bilibili.com/3546706109008142' },
+      { type: 'response', text: '  邮箱：3835385985@qq.com' },
+    ],
+    'neofetch': [
+      { type: 'success', text: '  chagumu@blog' },
+      { type: 'response', text: '  ─────────────' },
+      { type: 'response', text: '  OS: Hexo 6.3.0 on Butterfly 4.3.1' },
+      { type: 'response', text: '  Host: GitHub Pages' },
+      { type: 'response', text: '  Theme: Tech Blue (#00d1ff)' },
+      { type: 'response', text: '  Shell: fomal.js' },
+      { type: 'response', text: '  Posts: ' + document.querySelectorAll('.recent-post-item').length + ' articles' },
+      { type: 'response', text: '  Uptime: since 2024' },
+    ],
+    'date': [
+      { type: 'response', text: ' ' + new Date().toLocaleString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long', hour: '2-digit', minute: '2-digit', second: '2-digit' }) },
+    ],
+    'joke': [
+      { type: 'info', text: getRandomJoke() },
+    ],
+    'clear': 'CLEAR',
+    'sudo': [
+      { type: 'error', text: ' 权限不足！你以为你是谁？' },
+      { type: 'error', text: '   不过...你的好奇心值得鼓励 ' },
+    ],
+  };
+
+  if (command === 'clear') {
+    output.innerHTML = '';
+    return;
+  }
+
+  var responseList = responses[command];
+  if (!responseList) {
+    typeTerminalLine(output, 'error', '命令未找到: ' + cmd + '（输入 help 查看可用命令）');
+    return;
+  }
+
+  var delay = 0;
+  responseList.forEach(function (item, index) {
+    setTimeout(function () {
+      if (item.type === 'CLEAR') {
+        output.innerHTML = '';
+      } else if (item.type === 'link') {
+        var line = document.createElement('div');
+        line.className = 'terminal-line terminal-line--link';
+        var textNode = document.createTextNode(item.text);
+        var link = document.createElement('a');
+        link.href = item.href;
+        link.textContent = item.href;
+        link.target = '_blank';
+        line.appendChild(textNode);
+        line.appendChild(link);
+        output.appendChild(line);
+      } else {
+        typeTerminalLine(output, item.type, item.text);
+      }
+      var body = output.closest('.terminal-body');
+      if (body) body.scrollTop = body.scrollHeight;
+    }, delay);
+    delay += 120;
+  });
+}
+
+function typeTerminalLine(output, type, text) {
+  var line = document.createElement('div');
+  line.className = 'terminal-line terminal-line--' + type;
+  line.textContent = text;
+  output.appendChild(line);
+}
+
+function getRandomJoke() {
+  var jokes = [
+    '为什么程序员总是分不清万圣节和圣诞节？因为 Oct 31 == Dec 25 🎃',
+    '一个 SQL 语句走进酒吧，看到两张桌子（table），于是问：可以 JOIN 吗？',
+    '程序员的三大错觉：1. 这次一定能按时交付 2. 这个 bug 很简单 3. 不需要写注释',
+    '为什么 Java 开发者都戴眼镜？因为他们看不到 C# 😎',
+    '世界上有 10 种人：懂二进制的和不懂的。',
+    'Bug 不是 bug，是未文档化的特性。',
+    '代码能跑就不要动 —— 祖传代码守恒定律。',
+    '今天写了一个 bug，明天修了三个 bug，净赚两个！',
+  ];
+  return jokes[Math.floor(Math.random() * jokes.length)];
+}
+/* 首页终端小部件 end */
+
+//----------------------------------------------------------------
+
+/* 首页系统状态面板 start */
+document.addEventListener('pjax:complete', initStatusPanel);
+document.addEventListener('DOMContentLoaded', initStatusPanel);
+
+var statusPanelInited = false;
+var statusStartTime = Date.now();
+
+function initStatusPanel() {
+  var clock = document.getElementById('status-clock');
+  var uptime = document.getElementById('status-uptime');
+  var canvas = document.getElementById('status-wave-canvas');
+  if (!clock) return;
+  if (statusPanelInited) return;
+  statusPanelInited = true;
+
+  // 时钟更新
+  function updateClock() {
+    var now = new Date();
+    var h = String(now.getHours()).padStart(2, '0');
+    var m = String(now.getMinutes()).padStart(2, '0');
+    var s = String(now.getSeconds()).padStart(2, '0');
+    clock.textContent = h + ':' + m + ':' + s;
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+
+  // 运行时间
+  function updateUptime() {
+    var elapsed = Math.floor((Date.now() - statusStartTime) / 1000);
+    var h = String(Math.floor(elapsed / 3600)).padStart(2, '0');
+    var m = String(Math.floor((elapsed % 3600) / 60)).padStart(2, '0');
+    var s = String(elapsed % 60).padStart(2, '0');
+    uptime.textContent = h + ':' + m + ':' + s;
+  }
+  setInterval(updateUptime, 1000);
+
+  // 进度条动画
+  function animateMetrics() {
+    var cpu = 15 + Math.random() * 35;
+    var mem = 35 + Math.random() * 25;
+    var net = 60 + Math.random() * 30;
+
+    document.getElementById('cpu-value').textContent = Math.round(cpu) + '%';
+    document.getElementById('cpu-bar').style.width = cpu + '%';
+
+    document.getElementById('mem-value').textContent = Math.round(mem) + '%';
+    document.getElementById('mem-bar').style.width = mem + '%';
+
+    document.getElementById('net-value').textContent = Math.round(net) + '%';
+    document.getElementById('net-bar').style.width = net + '%';
+
+    var tx = Math.round(20 + Math.random() * 80);
+    document.getElementById('status-tx').textContent = 'tx ' + tx + ' kb/s';
+  }
+  animateMetrics();
+  setInterval(animateMetrics, 3000);
+
+  // 波形画布
+  if (canvas) {
+    drawWaveCanvas(canvas);
+  }
+}
+
+function drawWaveCanvas(canvas) {
+  var ctx = canvas.getContext('2d');
+  var dpr = window.devicePixelRatio || 1;
+  var rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  ctx.scale(dpr, dpr);
+
+  var width = rect.width;
+  var height = rect.height;
+  var phase = 0;
+  var points = [];
+  var maxPoints = 60;
+
+  for (var i = 0; i < maxPoints; i++) {
+    points.push(height / 2);
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    // 生成新数据点
+    var newValue = height / 2 + Math.sin(phase * 0.05) * 8 + Math.sin(phase * 0.13) * 5 + (Math.random() - 0.5) * 6;
+    points.push(newValue);
+    if (points.length > maxPoints) points.shift();
+
+    // 绘制波形
+    ctx.beginPath();
+    ctx.moveTo(0, points[0]);
+    for (var i = 1; i < points.length; i++) {
+      var x = (i / (maxPoints - 1)) * width;
+      var prevX = ((i - 1) / (maxPoints - 1)) * width;
+      var cpx = (prevX + x) / 2;
+      ctx.quadraticCurveTo(prevX, points[i - 1], cpx, (points[i - 1] + points[i]) / 2);
+    }
+    ctx.lineTo(width, points[points.length - 1]);
+
+    // 渐变描边
+    var gradient = ctx.createLinearGradient(0, 0, width, 0);
+    gradient.addColorStop(0, 'rgba(22, 127, 143, 0.2)');
+    gradient.addColorStop(0.3, 'rgba(14, 95, 108, 0.7)');
+    gradient.addColorStop(0.7, 'rgba(22, 127, 143, 0.9)');
+    gradient.addColorStop(1, 'rgba(10, 80, 95, 0.5)');
+    ctx.strokeStyle = gradient;
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // 填充区域
+    ctx.lineTo(width, height);
+    ctx.lineTo(0, height);
+    ctx.closePath();
+    var fillGradient = ctx.createLinearGradient(0, 0, 0, height);
+    fillGradient.addColorStop(0, 'rgba(22, 127, 143, 0.1)');
+    fillGradient.addColorStop(1, 'rgba(22, 127, 143, 0.02)');
+    ctx.fillStyle = fillGradient;
+    ctx.fill();
+
+    phase++;
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+
+  // 窗口 resize 时重设画布尺寸
+  window.addEventListener('resize', function () {
+    var newRect = canvas.getBoundingClientRect();
+    canvas.width = newRect.width * dpr;
+    canvas.height = newRect.height * dpr;
+    ctx.scale(dpr, dpr);
+    width = newRect.width;
+    height = newRect.height;
+  });
+}
+/* 首页系统状态面板 end */
+
+/* 知识库文章侧边栏：在 PJAX 切换后同步当前文章高亮 */
+(function () {
+  var storageKey = 'knowledge-post-sidebar-collapsed';
+
+  function setCollapsed(root, closeButton, openButton, collapsed) {
+    root.classList.toggle('knowledge-sidebar-collapsed', collapsed);
+    if (collapsed) {
+      openButton.removeAttribute('hidden');
+    } else {
+      openButton.setAttribute('hidden', '');
+    }
+    closeButton.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+    openButton.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+    try {
+      localStorage.setItem(storageKey, collapsed ? '1' : '0');
+    } catch (error) {}
+  }
+
+  function updateCurrent(sidebar) {
+    var currentPath = window.location.pathname.replace(/\/$/, '').toLowerCase();
+    sidebar.querySelectorAll('.knowledge-post-sidebar__links a.is-current').forEach(function (link) {
+      link.classList.remove('is-current');
+    });
+
+    sidebar.querySelectorAll('a[href]').forEach(function (link) {
+      var linkPath = new URL(link.getAttribute('href'), window.location.origin).pathname.replace(/\/$/, '').toLowerCase();
+      if (linkPath === currentPath) {
+        link.classList.add('is-current');
+        var parentCollection = link.closest('.knowledge-post-sidebar__collection');
+        var parentGroup = link.closest('.knowledge-post-sidebar__group');
+        if (parentCollection) parentCollection.open = true;
+        if (parentGroup) parentGroup.open = true;
+      }
+    });
+  }
+
+  window.initKnowledgeSidebar = function () {
+    var root = document.getElementById('body-wrap');
+    var sidebar = document.querySelector('[data-knowledge-sidebar]');
+    var closeButton = document.querySelector('[data-knowledge-sidebar-close]');
+    var openButton = document.querySelector('[data-knowledge-sidebar-open]');
+    if (!root || !sidebar || !closeButton || !openButton) return;
+
+    if (!closeButton.dataset.knowledgeSidebarBound) {
+      closeButton.dataset.knowledgeSidebarBound = '1';
+      closeButton.addEventListener('click', function () {
+        setCollapsed(root, closeButton, openButton, true);
+      });
+    }
+
+    if (!openButton.dataset.knowledgeSidebarBound) {
+      openButton.dataset.knowledgeSidebarBound = '1';
+      openButton.addEventListener('click', function () {
+        setCollapsed(root, closeButton, openButton, false);
+      });
+    }
+
+    updateCurrent(sidebar);
+
+    try {
+      setCollapsed(root, closeButton, openButton, localStorage.getItem(storageKey) === '1');
+    } catch (error) {
+      setCollapsed(root, closeButton, openButton, false);
+    }
+  };
+
+  window.initKnowledgeSidebar();
+  document.removeEventListener('pjax:complete', window.initKnowledgeSidebar);
+  document.addEventListener('pjax:complete', window.initKnowledgeSidebar);
+})();

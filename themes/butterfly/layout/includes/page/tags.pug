@@ -1,2 +1,6 @@
-.tag-cloud-list.is-center
-  !=cloudTags({source: site.tags, minfontsize: 1.2, maxfontsize: 2.1, limit: 0, unit: 'em'})
+p.minimal-taxonomy-lead 按技术与概念查找文章。数字表示包含该标签的文章数量。
+.minimal-tag-grid
+  each tag in site.tags.sort('length', -1).data
+    a.minimal-tag-link(href=url_for(tag.path))
+      span= tag.name
+      span.minimal-taxonomy-count= tag.length

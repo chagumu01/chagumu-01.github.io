@@ -1,9 +1,12 @@
 ---
 title: langchain中的chain到底是什么
 tags:
-  - null
+  - LangChain
+  - LCEL
+  - RAG
 categories:
-  - null
+  - 人工智能
+  - 应用开发
 mathjax: true
 cover: /assets/chain.png
 abbrlink: 73f49caa

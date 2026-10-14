@@ -21,7 +21,7 @@
 
 meta(charset='UTF-8')
 meta(http-equiv="X-UA-Compatible" content="IE=edge")
-meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+meta(name="viewport" content="width=device-width, initial-scale=1.0")
 title= tabTitle
 if pageKeywords
   meta(name="keywords" content=pageKeywords)
@@ -34,6 +34,7 @@ meta(name="theme-color" content=themeColor)
 include ./head/Open_Graph.pug
 
 !=favicon_tag(theme.favicon || config.favicon)
+link(rel="apple-touch-icon" href=url_for("/assets/apple-touch-icon.png"))
 link(rel="canonical" href=urlNoIndex())
 
 //- 預解析

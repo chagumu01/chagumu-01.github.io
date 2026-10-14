@@ -1,115 +1,106 @@
 extends includes/layout.pug
 
 block content
-  include ./includes/mixins/post-ui.pug
-  - const totoroPostDates = []
-  - site.posts.sort('date', -1).each(function(article){ totoroPostDates.push(date(article.date, 'YYYY-MM-DD')) })
   #recent-posts.recent-posts
-    details.home-gallery-panel
-      summary.home-gallery-summary
-        .home-gallery-summary__copy
-          span.home-gallery-summary__eyebrow Visual Shelf
-          h2.home-gallery-summary__title 分享生活照
-          p.home-gallery-summary__desc 学习的过程中不要忘了记录生活
-        .home-gallery-summary__action
-          span.home-gallery-summary__hint 点击展开
-          i.fas.fa-plus.home-gallery-summary__icon
-      .home-gallery-body
-        .home-gallery-wall
-          a.home-gallery-card.home-gallery-card--hero(href='/assets/1.jpg' data-fancybox='home-gallery' title='Quiet view')
-            img(src='/assets/1.jpg' alt='Quiet view')
-            span.home-gallery-card__label Quiet view
-          a.home-gallery-card.home-gallery-card--tall(href='/assets/2.jpg' data-fancybox='home-gallery' title='Soft weather')
-            img(src='/assets/2.jpg' alt='Soft weather')
-            span.home-gallery-card__label Soft weather
-          a.home-gallery-card(href='/assets/3.jpg' data-fancybox='home-gallery' title='Slow walk')
-            img(src='/assets/3.jpg' alt='Slow walk')
-            span.home-gallery-card__label Slow walk
-          a.home-gallery-card(href='/assets/4.jpg' data-fancybox='home-gallery' title='Clean air')
-            img(src='/assets/4.jpg' alt='Clean air')
-            span.home-gallery-card__label Clean air
-          a.home-gallery-card.home-gallery-card--tall(href='/assets/5.jpg' data-fancybox='home-gallery' title='Green hour')
-            img(src='/assets/5.jpg' alt='Green hour')
-            span.home-gallery-card__label Green hour
-          a.home-gallery-card(href='/assets/6.jpg' data-fancybox='home-gallery' title='Open sky')
-            img(src='/assets/6.jpg' alt='Open sky')
-            span.home-gallery-card__label Open sky
-          a.home-gallery-card(href='/assets/7.jpg' data-fancybox='home-gallery' title='Little pause')
-            img(src='/assets/7.jpg' alt='Little pause')
-            span.home-gallery-card__label Little pause
-          a.home-gallery-card(href='/assets/8.jpg' data-fancybox='home-gallery' title='Long memory')
-            img(src='/assets/8.jpg' alt='Long memory')
-            span.home-gallery-card__label Long memory
-          a.home-gallery-card(href='/assets/9.jpg' data-fancybox='home-gallery' title='Golden hour')
-            img(src='/assets/9.jpg' alt='Golden hour')
-            span.home-gallery-card__label Golden hour
-    .recent-post-item.recent-post-item--totoro
-      section.home-totoro-panel
-        .totoro-board-host
-          script.totoro-board-data(type='application/json')!= JSON.stringify(totoroPostDates)
-    .home-dashboard-row
-      .home-terminal-widget
-        .terminal-window
-          .terminal-titlebar
-            .terminal-dots
-              span.terminal-dot--red
-              span.terminal-dot--yellow
-              span.terminal-dot--green
-            .terminal-title-text chagumu@blog:~
-            .terminal-title-controls
-              span.terminal-minimize
-              span.terminal-maximize
-          .terminal-body
-            .terminal-ascii-art
-              pre.terminal-ascii
-                |  ██████╗██╗  ██╗███████╗███╗   ██╗
-                | ██╔════╝██║  ██║██╔════╝████╗  ██║
-                | ██║     ███████║█████╗  ██╔██╗ ██║
-                | ██║     ██══██║██╔══╝  ██║╚██╗██║
-                | ╚██████╗██║  ██║███████╗██║ ████║
-                |  ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═══╝
-            .terminal-output#terminal-output
-            .terminal-input-line
-              span.terminal-prompt $&nbsp;
-              input.terminal-input#terminal-input(type='text' autocomplete='off' spellcheck='false' placeholder='输入 help 查看可用命令...')
-      .home-status-widget
-        .status-panel
-          .status-panel__header
-            .status-panel__title
-              i.fas.fa-microchip
-              span SYS_MONITOR
-            .status-panel__uptime
-              span.uptime-label uptime
-              span#status-uptime 00:00:00
-          .status-panel__clock
-            span#status-clock 00:00:00
-          .status-metrics
-            .status-metric
-              .status-metric__label
-                span CPU.LOAD
-                span#cpu-value 0%
-              .status-metric__bar
-                .status-metric__fill#cpu-bar
-            .status-metric
-              .status-metric__label
-                span MEM.USAGE
-                span#mem-value 0%
-              .status-metric__bar
-                .status-metric__fill#mem-bar
-            .status-metric
-              .status-metric__label
-                span NET.SIGNAL
-                span#net-value 0%
-              .status-metric__bar
-                .status-metric__fill#net-bar
-          .status-panel__wave
-            canvas#status-wave-canvas
-          .status-panel__footer
-            span.status-panel__telemetry // telemetry · realtime
-            span#status-tx tx 0 kb/s
-    //- #bber-talk
-    //-   link(rel="stylesheet", href="/static/css/bbtalk.css")
-    //-   script(src='/static/js/timeago.min.js')
-    //-   script(src='/static/js/bbtalk.js')
-    +postUI
+    if page.current === 1
+      section.minimal-intro
+        p.minimal-eyebrow NOTES · IDEAS · LIFE
+        h1
+          span 总是学习，
+          span 总在进步。
+        p.minimal-intro__description 记录技术学习，也记录生活。把遇到的问题、理解的过程和新的想法，慢慢整理在这里。
+        a.minimal-text-link(href=url_for('/about/')) 关于我 →
+      section.minimal-topics(aria-labelledby='topics-title')
+        .minimal-section-heading
+          h2#topics-title 从一个专题开始
+          a(href=url_for('/archives/')) 全部文章 →
+        .minimal-topic-grid
+          a.minimal-topic(href=url_for('/posts/e48005e0.html'))
+            span.minimal-topic__number 01
+            h3 大模型与 Agent
+            p 从基础概念到 RAG、MCP 与 Agent 的学习笔记。
+            span.minimal-topic__action 开始阅读 →
+          a.minimal-topic(href=url_for('/java/core/'))
+            span.minimal-topic__number 02
+            h3 Java 学习资料
+            p 整理基础知识与学习资料，在实践中积累理解。
+            span.minimal-topic__action 浏览资料 →
+          a.minimal-topic(href=url_for('/ai/path/'))
+            span.minimal-topic__number 03
+            h3 AI 学习路线
+            p 收集大模型学习资源，寻找下一步的方向。
+            span.minimal-topic__action 查看路线 →
+    if page.current === 1
+      section.home-console-grid(aria-label='博客终端与状态面板' data-home-dashboard data-posts=site.posts.length)
+        .home-console-card
+          .home-console-header
+            span.home-console-label CMD
+            span.home-console-caption chagumu@blog:~
+          .home-console-body
+            #home-command-output.home-command-output(role='log' aria-label='命令输出' aria-live='polite')
+            form#home-command-form.home-command-form
+              label(for='home-command-input') $
+              input#home-command-input(type='text' placeholder='输入 help 查看命令' autocomplete='off' spellcheck='false' aria-label='博客终端命令')
+              button(type='submit' aria-label='执行命令') ↵
+        .home-console-card.home-monitor
+          .home-console-header
+            span.home-console-label SYS_MONITOR
+            span.home-console-caption 模拟遥测
+          .home-monitor-clock
+            span#home-monitor-clock --:--:--
+            span.home-monitor-zone 上海 / UTC+8
+          .home-monitor-metrics
+            each metric in ['CPU', 'MEM', 'NET']
+              .home-monitor-metric
+                .home-monitor-metric-label
+                  span= metric
+                  span(data-monitor-value=metric) —
+                .home-monitor-bar
+                  span(data-monitor-bar=metric)
+          svg.home-monitor-wave(viewBox='0 0 300 32' preserveAspectRatio='none' aria-hidden='true')
+            path#home-monitor-wave(fill='none' stroke='currentColor' stroke-width='1.5')
+          .home-monitor-footer
+            span SESSION
+            span#home-monitor-uptime 00:00:00
+    if page.current === 1
+      - const writingDates = site.posts.sort('date', -1).data.map(article => ({ date: date(article.date, 'YYYY-MM-DD'), title: article.title, path: url_for(article.path) }))
+      section.home-writing-calendar(data-writing-calendar aria-labelledby='writing-calendar-title')
+        script.writing-calendar-data(type='application/json')!= JSON.stringify(writingDates).replace(/</g, '\\u003c')
+        .home-writing-header
+          div
+            h2#writing-calendar-title 写作记录
+            p#writing-calendar-summary 按文章发布日期记录
+          select#writing-calendar-year(aria-label='选择写作记录年份')
+        .home-writing-scroll
+          .home-writing-months(aria-hidden='true')
+          .home-writing-grid(aria-label='每日文章发布记录')
+        .home-writing-footer
+          span 点击有颜色的日期，查看当天文章。
+          .home-writing-legend
+            span 少
+            each level in [0, 1, 2, 3, 4]
+              span.home-writing-cell(data-level=level aria-hidden='true')
+            span 多
+        #writing-calendar-detail.home-writing-detail(aria-live='polite')
+    section.minimal-articles(aria-labelledby='articles-title')
+      .minimal-section-heading
+        h2#articles-title= page.current === 1 ? '最新文章' : '文章 · 第 ' + page.current + ' 页'
+        a(href=url_for('/archives/')) 文章归档 →
+      each article in page.posts.data
+        - const articleLink = article.link || article.path
+        - const articleTitle = article.title || _p('no_title')
+        - const summary = strip_html(article.description || article.excerpt || article.content).replace(/\s+/g, ' ').trim()
+        article.minimal-article
+          .minimal-article__meta
+            time(datetime=date_xml(article.date))= date(article.date, 'YYYY-MM-DD')
+            if article.categories.length
+              span ·
+              a(href=url_for(article.categories.data[0].path))= article.categories.data[0].name
+            if article.sticky > 0 || article.top
+              span.minimal-pill 置顶
+          h3
+            a(href=url_for(articleLink))= articleTitle
+          if !article.password && !article.encrypt && summary
+            p= summary.substring(0, 110) + (summary.length > 110 ? '…' : '')
+          a.minimal-article__read(href=url_for(articleLink) aria-label='阅读：' + articleTitle) 阅读文章 →
     include includes/pagination.pug

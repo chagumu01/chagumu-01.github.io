@@ -1,9 +1,12 @@
 ---
 title: RAG中的Indexing全解析
 tags:
-  - null
+  - RAG
+  - 向量检索
+  - Embedding
 categories:
-  - null
+  - 人工智能
+  - 应用开发
 mathjax: true
 cover: /assets/indexing.png
 abbrlink: b43bf9d3

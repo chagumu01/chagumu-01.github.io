@@ -3,22 +3,22 @@
 # --------------------------------------
 
 menu:
-  首页: / || icon-home || faa-tada
-  友链: /friends/ || fas fa-link || faa-tada
-  开往: https://www.travellings.cn/go.html || fas fa-train-subway || faa-tada
-  文章 || icon--article || faa-tada || hide:
-    知识库: /posts/e48005e0.html || fas fa-book-open || faa-tada
-  自述: /about/ || icon-paperplane || faa-tada
-  社交 || icon-shejiaoxinxi || faa-tada || hide:
-    留言板: /comments/ || icon-liuyan || faa-tada
-  资源 || icon-xiangzi || faa-tada || hide:
-    Java资料: /java/core/ || icon-javascript || faa-tada
-    大模型资料: /ai/path/ || icon-ai || faa-tada
+  文章: /archives/
+  专题: /posts/e48005e0.html
+  关于: /about/
+  更多:
+    分类: /categories/
+    标签: /tags/
+    友链: /friends/
+    留言: /comments/
+    Java资料: /java/core/
+    大模型资料: /ai/path/
+    开往: https://www.travellings.cn/go.html
 
 # Code Blocks (代碼相關)
 # --------------------------------------
 
-highlight_theme: mac #  darker / pale night / light / ocean / mac / mac light / false
+highlight_theme: light #  darker / pale night / light / ocean / mac / mac light / false
 highlight_copy: true # copy button
 highlight_lang: true # show the code language
 highlight_shrink: false # true: shrink the code blocks / false: expand the code blocks | none: expand code blocks and hide the button
@@ -95,7 +95,7 @@ mathjax:
 # --------------------------------------
 
 # Favicon（網站圖標）
-favicon:
+favicon: /favicon.ico
 
 # Avatar (頭像)
 avatar:
@@ -103,7 +103,7 @@ avatar:
   effect: false
 
 # Disable all banner image
-disable_top_img: false
+disable_top_img: true
 
 # The banner image of home page
 index_img:
@@ -134,9 +134,9 @@ category_per_img:
 
 cover:
   # display the cover or not (是否顯示文章封面)
-  index_enable: true
+  index_enable: false
   aside_enable: true
-  archives_enable: true
+  archives_enable: false
   # the position of cover in home page (封面顯示的位置)
   # left/right/both
   position: both
@@ -494,21 +494,21 @@ site_verification:
 
 theme_color:
   enable: true
-  main: "#00d1ff"                   # 主色：科技蓝
-  paginator: "#00d1ff"              # 分页按钮高亮
-  button_hover: "#00ffa3"           # 按钮悬停：蓝绿荧光
-  text_selection: "#00d1ff"         # 选中文本颜色
-  link_color: "#18ffff"             # 链接颜色：亮青色
-  meta_color: "#8a8f9c"             # 元信息文字
-  hr_color: "#00bcd4"               # 分割线
-  code_foreground: "#e0f7ff"        # 代码前景
-  code_background: "rgba(0, 15, 35, .85)"  # 代码背景：深蓝
-  toc_color: "#00e5ff"              # 目录高亮
-  blockquote_padding_color: "#00bcd4"
-  blockquote_background_color: "rgba(0, 188, 212, .08)"
-  scrollbar_color: "#00e5ff"
-  meta_theme_color_light: "#0b1020" # 浅色模式浏览器地址栏
-  meta_theme_color_dark: "#02040a"  # 深色模式浏览器地址栏
+  main: "#1B1F4C"
+  paginator: "#1B1F4C"
+  button_hover: "#354A9F"
+  text_selection: "#DDE3F5"
+  link_color: "#354A9F"
+  meta_color: "#606773"
+  hr_color: "#E5E7EB"
+  code_foreground: "#20232B"
+  code_background: "#F7F8FA"
+  toc_color: "#354A9F"
+  blockquote_padding_color: "#354A9F"
+  blockquote_background_color: "#EEF1FA"
+  scrollbar_color: "#B8BABE"
+  meta_theme_color_light: "#FFFFFF"
+  meta_theme_color_dark: "#17191F"
 
 # The top_img settings of home page
 # default: top img - full screen, site info - middle (默認top_img全屏，site_info在中間)
@@ -528,14 +528,14 @@ tag_ui: # 留空或 index
 # The formal of image: url(http://xxxxxx.com/xxx.jpg)
 # "#e4f4f6" "#efefef"
 background:
-  #【必选】默认背景（已改为本地 love.png）
-  default: url(/assets/love.png);
+  # Minimal reading backgrounds
+  default: "#FFFFFF"
   #【可选】PC端夜间模式背景 
-  darkmode: url(/assets/love.png);
+  darkmode: "#17191F"
   #【可选】移动端日间默认背景 
-  mobileday: url(/assets/love.png);
+  mobileday: "#FFFFFF"
   #【可选】移动端夜间模式背景 
-  mobilenight: url(/assets/love.png);
+  mobilenight: "#17191F"
 
 # Footer Background
 footer_bg: false
@@ -544,7 +544,7 @@ footer_bg: false
 rightside-bottom:
 
 # Enter transitions (開啓網頁進入效果)
-enter_transitions: true
+enter_transitions: false
 
 # Background effects (背景特效)
 # --------------------------------------
@@ -618,14 +618,14 @@ beautify:
 # Global font settings
 # Don't modify the following settings unless you know how they work (非必要不要修改)
 font:
-  global-font-size: 15.5px
-  code-font-size: 14.5px
+  global-font-size: 16px
+  code-font-size: 14px
   # -apple-system, BlinkMacSystemFont, "Segoe UI" , "Helvetica Neue" , Lato, Roboto, "PingFang SC" , "Microsoft JhengHei" , "Microsoft YaHei" , sans-serif
   # Wenkai, consolas, -apple-system, 'Quicksand', 'Nimbus Roman No9 L', 'PingFang SC', 'Hiragino Sans GB', 'Noto Serif SC', 'Microsoft Yahei', 'WenQuanYi Micro Hei', 'ST Heiti', sans-serif;
-  font-family: YSHST,var(--global-font), -apple-system, 'Quicksand', 'Nimbus Roman No9 L', 'PingFang SC', 'Hiragino Sans GB', 'Noto Serif SC', 'Microsoft Yahei', 'WenQuanYi Micro Hei', 'ST Heiti', sans-serif;
+  font-family: "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif"
   # consolas, ZhuZiAWan_light, "Microsoft YaHei", Menlo, "PingFang SC", "Microsoft JhengHei", sans-serif
   # Consolas_1, ZhuZiAWan_light, "Microsoft YaHei", Menlo, "PingFang SC", "Microsoft JhengHei", sans-serif
-  code-font-family: Consolas, var(--global-font), "Microsoft YaHei", Menlo, "PingFang SC", "Microsoft JhengHei", sans-serif
+  code-font-family: "Consolas, Menlo, monospace"
 
 # Font settings for the site title and site subtitle
 # https://fonts.googleapis.com/css?family=Titillium+Web&display=swap
@@ -637,7 +637,7 @@ blog_title_font:
 
 # The setting of divider icon (水平分隔線圖標設置)
 hr_icon:
-  enable: true
+  enable: false
   icon: '\f2dc' # the unicode value of Font Awesome icon, such as '\3423'
   icon-top: -10px
 
@@ -667,7 +667,7 @@ subtitle:
 # Loading Animation (加載動畫)
 # preloader: false
 preloader:
-  enable: true # true|false
+  enable: false # true|false
   load_color: # '#37474f'
   load_style: heo # default|gear|ironheart|scarecrow|triangles|wizard|image|spincat|heo(新增)
   load_image: # url
@@ -777,17 +777,17 @@ darkmode:
   button: true
   # Switch dark/light mode automatically (自動切換 dark mode和 light mode)
   # autoChangeMode: 1  Following System Settings, if the system doesn't support dark mode, it will switch dark mode between 6 pm to 6 am
-  # autoChangeMode: 2  Switch dark mode between 6 pm to 6 am
+  # autoChangeMode: false  Switch dark mode between 6 pm to 6 am
   # autoChangeMode: false
-  autoChangeMode: 2
+  autoChangeMode: false
 
 # Don't modify the following settings unless you know how they work (非必要請不要修改 )
 # Choose: readmode,translate,darkmode,hideAside,toc,chat,comment
 # Don't repeat 不要重複
 rightside_item_order:
-  enable: false
-  hide: # readmode,translate,darkmode,hideAside
-  show: # toc,chat,comment
+  enable: true
+  hide: readmode
+  show: toc,comment
 
 # Lightbox (圖片大圖查看模式)
 # --------------------------------------
@@ -877,7 +877,7 @@ pwa:
   enable: false
   manifest: /manifest.json
   theme_color: var(--theme-color)
-  apple_touch_icon: /assets/gulp/siteicon/128.png
+  apple_touch_icon: /assets/apple-touch-icon.png
   favicon_32_32: /assets/gulp/siteicon/32.png
   favicon_16_16: /assets/gulp/siteicon/16.png
   mask_icon: /assets/gulp/siteicon/128.png
@@ -894,34 +894,21 @@ css_prefix: true
 # 插入代码到头部 </head> 之前 和 底部 </body> 之前
 inject:
   head:
-    - <link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"> # 常规css
-    - <link rel="stylesheet" href="https://cdn1.tianli0.top/npm/element-ui@2.15.6/packages/theme-chalk/lib/index.css"> # 引入组件库(f12)
+    - <link rel="stylesheet" href="/css/custom.css"> # Existing page-specific components
+    - <link rel="stylesheet" href="/css/minimal.css?v=20261014-9"> # Minimal reading theme
     # 综合美化模块样式引入
-    - <style id="themeColor"></style> # 主题色
-    - <style id="rightSide"></style> # 侧边栏
-    - <style id="transPercent"></style> # 透明度调节
-    - <style id="blurNum"></style> # 模糊半径调节
-    - <style id="settingStyle"></style> # 模糊效果开关
-    - <span id="fps"></span> # 帧率检测
-    - <style id="defineBg"></style> # 自定义背景选项
-    - <style id="menu_shadow"></style> # 菜单发光样式
     - <script src="https://cdn.jsdelivr.net/npm/echarts@6/dist/echarts.min.js"></script>
 
   bottom:
-    - <script src="https://cdn.staticfile.org/jquery/3.6.3/jquery.min.js"></script> # jQuery
-    - <script async src="https://cdn1.tianli0.top/npm/vue@2.6.14/dist/vue.min.js"></script> # VUE
-    - <script async src="https://cdn1.tianli0.top/npm/element-ui@2.15.6/lib/index.js"></script> # ElementUI
+    - <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> # jQuery
     - <script async src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script> # 分享按钮依赖
-    - <script defer type="text/javascript" src="https://cdn1.tianli0.top/npm/sweetalert2@8.19.0/dist/sweetalert2.all.js"></script> # 节日弹窗依赖
     - <script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script> # 顶部进度条js
-    - <script defer src="https://cdn1.tianli0.top/gh/nextapps-de/winbox/dist/winbox.bundle.min.js"></script> # winbox
     - <script async src="//at.alicdn.com/t/c/font_3586335_hsivh70x0fm.js"></script> # js图标引入1
     - <script async src="//at.alicdn.com/t/c/font_3636804_gr02jmjr3y9.js"></script> # js图标引入2
     - <script async src="//at.alicdn.com/t/c/font_3612150_kfv55xn3u2g.js"></script> # js图标引入3
-    - <script async src="https://cdn.wpon.cn/2022-sucai/Gold-ingot.js"></script>  # 新年元宝
-    - <canvas id="universe"></canvas> # 星空画布
-    - <canvas id="snow"></canvas> # 雪花画布
-    - <script defer src="/js/fomal.js"></script> # 主模块js
+    - <script defer src="/js/minimal.js"></script> # Minimal theme interactions
+    - <script defer src="/js/home-dashboard.js?v=20261014-1"></script>
+    - <script defer src="/js/writing-calendar.js?v=20261014-1"></script>
     - <script>document.querySelectorAll('a[href*="travellings.cn"]').forEach(function(a){a.target="_blank";a.rel="noopener noreferrer";a.title="开往-友链接力"})</script>
 
 # CDN
@@ -961,7 +948,7 @@ CDN:
     # valine: https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/valine/1.4.16/Valine.min.js
     # disqusjs: https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/disqusjs/1.3.0/disqus.js
     # disqusjs_css: https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/disqusjs/1.3.0/disqusjs.css
-    twikoo: https://cdn.staticfile.org/twikoo/1.6.8/twikoo.all.min.js
+    twikoo: https://cdn.jsdelivr.net/npm/twikoo@1.6.8/dist/twikoo.all.min.js
     # waline_js: https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/waline/1.5.4/Waline.min.js
     # waline_css:
     # sharejs: https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js
@@ -977,8 +964,8 @@ CDN:
     # instantpage: https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js
     # typed: https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/typed.js/2.0.12/typed.min.js
     # pangu:
-    fancybox_css_v4: https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css
-    fancybox_v4: https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.umd.min.js
+    fancybox_css_v4: /vendor/fancybox/fancybox.css
+    fancybox_v4: /vendor/fancybox/fancybox.umd.js
     # medium_zoom: https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/medium-zoom/1.0.6/medium-zoom.min.js
     # snackbar_css: https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.16/snackbar.min.css
     # snackbar: https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.16/snackbar.min.js
@@ -989,7 +976,7 @@ CDN:
     # fontawesomeV6: https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css
     # flickr_justified_gallery_js: https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.js
     # flickr_justified_gallery_css: https://cdn.staticfile.org/flickr-justified-gallery/2.1.2/fjGallery.min.css
-    meting_js: https://cdn1.tianli0.top/npm/js-heo@1.0.12/metingjs/Meting.min.js
+    meting_js: /vendor/meting/Meting.min.js
     # prismjs_js: https://cdn1.tianli0.top/npm/prismjs@1.1.0/prism.js
     # prismjs_lineNumber_js: https://cdn1.tianli0.top/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js
     # prismjs_autoloader: https://cdn1.tianli0.top/npm/prismjs/plugins/autoloader/prism-autoloader.min.js
@@ -1063,7 +1050,7 @@ wowjs:
 # envelope_comment
 # see https://akilar.top/posts/e2d3c450/
 envelope_comment:
-  enable: true #控制开关
+  enable: false #控制开关
   custom_pic:
     cover: https://tuchuang.voooe.cn/images/2023/01/02/violet.webp #信笺头部图片
     line: https://tuchuang.voooe.cn/images/2023/01/02/line.webp #信笺底部图片
@@ -1100,7 +1087,7 @@ tag_plugins:
     placeholder: "/assets/coffee.png" #link_card标签默认的图标图片
   CDN:
     anima: https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css #动画标签anima的依赖
-    jquery: https://cdn.staticfile.org/jquery/3.6.3/jquery.min.js #issues标签依赖
+    jquery: https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js #issues标签依赖
     issues: https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/issues.js #issues标签依赖
     carousel: https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js
     tag_plugins_css: https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css

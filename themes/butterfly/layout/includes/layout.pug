@@ -3,6 +3,7 @@
 - var hideAside = !theme.aside.enable || page.aside === false ? 'hide-aside' : ''
 //- - var pageType = is_post() ? 'post' : 'page'
 - var pageType = is_home() ? 'page home' : is_post() ? 'post' : 'page'
+- if (!is_post()) page.aside = false
 
 doctype html
 html(lang=config.language data-theme=theme.display_mode class=htmlClassHideAside)
@@ -86,5 +87,5 @@ html(lang=config.language data-theme=theme.display_mode class=htmlClassHideAside
 
     include ./rightside.pug
     !=partial('includes/third-party/search/index', {}, {cache: true})
-    !=partial('includes/rightmenu',{}, {cache:true})
+
     include ./additional-js.pug

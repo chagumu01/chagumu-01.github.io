@@ -15,10 +15,10 @@
     var countEl = document.getElementById('flk-count')
     if (!countEl) return
     if (!cards.length) {
-      countEl.textContent = '名册还是空的，欢迎来做第一位朋友'
+      countEl.textContent = '暂无友链'
       return
     }
-    countEl.textContent = '共 ' + cards.length + ' 家'
+    countEl.textContent = '共 ' + cards.length + ' 个站点'
   }
 
   function bindRandomVisit() {
@@ -29,7 +29,7 @@
         document.querySelectorAll('#article-container .site-card')
       )
       if (!links.length) {
-        alert('名册里还没有友链呢，欢迎你来申请第一个～')
+        alert('暂无可访问的友链。')
         return
       }
       var target = links[Math.floor(Math.random() * links.length)]
@@ -42,7 +42,7 @@
       data.siteshot ||
       'https://image.thum.io/get/allowJPG/wait/20/width/600/crop/950/' + data.link
     var body =
-      '想交换友链，信息如下：\n\n' +
+      '友链交换申请：\n\n' +
       '站名：' +
       data.name +
       '\n' +
@@ -64,7 +64,7 @@
       '---\n' +
       '已在友链页添加了 ' +
       SITE_URL +
-      '，辛苦审核啦～'
+      '。请审核以上信息。'
     var title = '[友链] ' + data.name
     return (
       'https://github.com/' +
@@ -91,7 +91,7 @@
         siteshot: (formData.get('siteshot') || '').trim()
       }
       if (!data.name || !data.link || !data.avatar || !data.descr) {
-        alert('站名、地址、头像和简介都要填哦～')
+        alert('请填写站点名称、地址、头像和简介。')
         return
       }
       try {
@@ -99,7 +99,7 @@
         new URL(data.avatar)
         if (data.siteshot) new URL(data.siteshot)
       } catch (error) {
-        alert('链接格式好像不太对，再检查一下？')
+        alert('请填写有效的站点、头像和预览图链接。')
         return
       }
       window.open(buildIssueUrl(data), '_blank', 'noopener')
@@ -114,7 +114,7 @@
     btn.addEventListener('click', function () {
       var text = code.textContent.trim()
       function done() {
-        btn.textContent = '复制好啦'
+        btn.textContent = '已复制'
         setTimeout(function () {
           btn.textContent = defaultLabel
         }, 1600)
@@ -133,11 +133,20 @@
     })
   }
 
-  document.addEventListener('DOMContentLoaded', function () {
+  function initialize() {
+    var root = document.getElementById('flk-page')
+    if (!root) return
+    if (root.dataset.initialized) return
+    root.dataset.initialized = 'true'
     reorderSections()
     updateLinkCount()
     bindRandomVisit()
     bindForm()
     bindCopy()
-  })
+  }
+  if (window.initializeFriendsPage) document.removeEventListener('pjax:complete', window.initializeFriendsPage)
+  window.initializeFriendsPage = initialize
+  document.addEventListener('pjax:complete', initialize)
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initialize, { once: true })
+  else initialize()
 })()

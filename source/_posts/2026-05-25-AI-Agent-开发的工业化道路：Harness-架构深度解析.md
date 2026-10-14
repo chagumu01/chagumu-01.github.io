@@ -1,9 +1,12 @@
 ---
 title: AI Agent 开发的工业化道路：Harness 架构深度解析
 tags:
-  - null
+  - Agent
+  - Harness
+  - 工程实践
 categories:
-  - null
+  - 人工智能
+  - Agent工程
 mathjax: true
 cover: /assets/harness.png
 abbrlink: b62370ab
