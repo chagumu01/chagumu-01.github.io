@@ -11,15 +11,18 @@ date: 2022-08-10 16:05:11
   </div>
 
   <div class="about-content">
-    <section class="about-section">
+<section class="about-section">
       <h2>个人介绍</h2>
       <p>你好，欢迎来到我的个人博客！我是一个热爱技术和生活的人，喜欢分享自己的学习心得和生活感悟。</p>
       <p>这个博客是我记录成长、分享知识的地方，希望能够为你带来一些有价值的内容。</p>
-    </section>
+</section>
 
-    大一开始接触编程，学习算法
-    大二上决定开始学java，然后一直学技术栈，学的全，忘的也快，还是应该先看基础知识直接开始做项目，这样知识更牢，寒假学习做两个经典项目
-    大二下了解到大模型，并准备java+ai一起学习
+<section class="about-section about-journey">
+  <h2>学习足迹</h2>
+  <p><strong>大一</strong>：开始接触编程，学习算法。</p>
+  <p><strong>大二上</strong>：决定开始学 Java，然后一直学技术栈。学得全，忘得也快，还是应该先看基础知识，再直接开始做项目，这样知识更牢。寒假学习做两个经典项目。</p>
+  <p><strong>大二下</strong>：了解到大模型，并准备 Java + AI 一起学习。</p>
+</section>
   </div>
 </div>
 

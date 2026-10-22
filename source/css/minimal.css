@@ -130,7 +130,8 @@ body #nav .menus_items .menus_item:hover .menus_item_child,
 body #nav .menus_items .menus_item:focus-within .menus_item_child { display: block !important; }
 body #nav .menus_items .menus_item .menus_item_child li { display: block; width: 100%; border-radius: 4px; }
 body #nav .menus_items .menus_item .menus_item_child a { display: flex; width: 100%; padding: 10px 12px; min-height: 44px; }
-body #nav .menus_items .menus_item .menus_item_child li:hover { background: var(--minimal-surface); }
+body #nav .menus_items .menus_item .menus_item_child li:is(:hover,:focus-within) { background: var(--minimal-tint) !important; }
+body #nav .menus_items .menus_item .menus_item_child a:is(:hover,:focus-visible) { color: var(--minimal-link) !important; background: var(--minimal-tint) !important; border-radius: 4px; }
 body #nav #nav-right { display: flex; align-items: center; gap: 10px; margin-left: 24px; }
 body #nav button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-width: 44px; min-height: 44px; padding: 0 8px; border: 0; background: transparent; font: inherit; font-size: 14px; border-radius: 6px; }
 body #nav button:hover { background: var(--minimal-surface); }
@@ -267,6 +268,9 @@ body :is(.about-avatar,.hero-icon) { animation: none !important; box-shadow: non
 body .about-section:hover { transform: none !important; }
 body .about-section h2 { border-bottom: 1px solid var(--minimal-border) !important; }
 body .about-section p { color: var(--minimal-muted) !important; }
+body #page .about-content { min-width: 0; }
+body #page .about-section { overflow-wrap: anywhere; }
+body #page .about-journey p { white-space: normal; line-height: 1.8; }
 body :is(.category-card,.tool-card,.topic-card,.app-card):hover { transform: none !important; border-color: var(--minimal-link) !important; }
 body #footer { background: var(--minimal-bg) !important; border-top: 1px solid var(--minimal-border); color: var(--minimal-muted); }
 body #footer #footer-wrap { padding: 32px 40px !important; color: var(--minimal-muted); }
