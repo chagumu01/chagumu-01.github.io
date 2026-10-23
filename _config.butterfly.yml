@@ -42,7 +42,7 @@ social:
   QQ: /assets/QQ.jpg || icon-QQ || faa-tada
   B站: https://space.bilibili.com/3546706109008142?spm_id_from=333.1387.0.0 || icon-bilibili || faa-tada
   QQ邮箱: mailto:3835385985@qq.com || icon-youxiang || faa-tada
-  github: https://github.com/chagumu-01 || icon-github || faa-tada
+  github: https://github.com/chagumu01 || icon-github || faa-tada
   # 微博: https://weibo.com/u/6473136435 || icon-weibo || faa-tada
   # 知乎: https://www.zhihu.com/people/liang-jia-chao-19 || icon-shejiaotubiao-10 || faa-tada
   # RSS: /atom.xml || icon-RSS || faa-tada
@@ -895,7 +895,7 @@ css_prefix: true
 inject:
   head:
     - <link rel="stylesheet" href="/css/custom.css"> # Existing page-specific components
-    - <link rel="stylesheet" href="/css/minimal.css?v=20261014-9"> # Minimal reading theme
+    - <link rel="stylesheet" href="/css/minimal.css?v=20261024-1"> # Minimal reading theme
     # 综合美化模块样式引入
     - <script src="https://cdn.jsdelivr.net/npm/echarts@6/dist/echarts.min.js"></script>
 

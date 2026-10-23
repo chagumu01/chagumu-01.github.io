@@ -5,7 +5,7 @@ tags:
   - 向量检索
   - Embedding
 categories:
-  - 人工智能
+  - agent
   - 应用开发
 mathjax: true
 cover: /assets/indexing.png

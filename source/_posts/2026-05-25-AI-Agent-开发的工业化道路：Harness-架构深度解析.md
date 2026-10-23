@@ -5,7 +5,7 @@ tags:
   - Harness
   - 工程实践
 categories:
-  - 人工智能
+  - agent
   - Agent工程
 mathjax: true
 cover: /assets/harness.png

@@ -5,7 +5,7 @@ tags:
   - LCEL
   - RAG
 categories:
-  - 人工智能
+  - agent
   - 应用开发
 mathjax: true
 cover: /assets/chain.png

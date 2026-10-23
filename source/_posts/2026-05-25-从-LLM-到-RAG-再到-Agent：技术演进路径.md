@@ -5,7 +5,7 @@ tags:
   - RAG
   - Agent
 categories:
-  - 人工智能
+  - agent
   - Agent工程
 mathjax: true
 cover: /assets/从_LLM_到_RAG_再到_Agent1.png

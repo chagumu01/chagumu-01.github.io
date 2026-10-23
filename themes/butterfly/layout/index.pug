@@ -82,6 +82,24 @@ block content
               span.home-writing-cell(data-level=level aria-hidden='true')
             span 多
         #writing-calendar-detail.home-writing-detail(aria-live='polite')
+      button.home-signature(type='button' data-signature aria-label='重播 chagumu 签名动画' title='点击重新描画')
+        svg.home-signature__canvas(viewBox='0 0 760 220' role='img' aria-labelledby='signature-title')
+          title#signature-title chagumu
+          defs
+            linearGradient#signature-ink(gradientUnits='userSpaceOnUse' x1='65' y1='55' x2='675' y2='165')
+              stop(offset='0%' stop-color='#1b1f4c')
+              stop(offset='40%' stop-color='#343858')
+              stop(offset='72%' stop-color='#696d7e')
+              stop(offset='100%' stop-color='#989c9f')
+          g.home-signature__ink(fill='none' stroke='url(#signature-ink)' stroke-width='9' stroke-linecap='round' stroke-linejoin='round' transform='translate(25 0) skewX(-10)')
+            path(pathLength='1' d='M125 92 C96 67 61 92 63 124 C64 153 99 155 123 132')
+            path(pathLength='1' d='M146 143 L167 49 C174 20 196 33 184 61 C174 85 154 100 151 121 C169 78 210 75 200 111 L193 137 Q193 153 214 137' style='--letter:1')
+            path(pathLength='1' d='M287 94 C259 72 229 99 230 128 C231 158 268 145 283 108 L289 91 L278 134 Q276 154 300 137' style='--letter:2')
+            path(pathLength='1' d='M373 95 C347 73 316 98 316 126 C316 158 354 141 369 107 L375 91 L354 177 C347 209 315 200 321 177 C327 157 366 154 392 130' style='--letter:3')
+            path(pathLength='1' d='M411 91 L401 126 C391 158 422 155 441 122 L452 91 L442 132 Q438 154 462 137' style='--letter:4')
+            path(pathLength='1' d='M480 143 L493 91 L482 133 C503 87 529 77 526 102 L516 141 C537 94 567 77 563 103 L555 131 Q549 154 575 136' style='--letter:5')
+            path(pathLength='1' d='M599 91 L590 125 C580 158 612 155 630 122 L641 91 L631 130 C624 155 650 150 674 128' style='--letter:6')
+        span.home-signature__replay(aria-hidden='true') ↻
     section.minimal-articles(aria-labelledby='articles-title')
       .minimal-section-heading
         h2#articles-title= page.current === 1 ? '最新文章' : '文章 · 第 ' + page.current + ' 页'
